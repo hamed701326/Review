@@ -22,27 +22,22 @@ public class CommentController {
 
     @GetMapping("/list/{productId}/{skip}/{limit}")
     public Page<UserCommentResponse> getComments(@PathVariable String productId,
-                                     @PathVariable int skip,
-                                     @PathVariable int limit) {
+                                                 @PathVariable int skip,
+                                                 @PathVariable int limit) {
         return commentService.getComments(productId, skip, limit)
                 .map(this::toUserCommentResponse);
     }
 
     @PostMapping("/add/{productId}")
     public UserCommentResponse addComment(@PathVariable String productId,
-                           @RequestBody CommentAddRequest request) {
+                                          @RequestBody CommentAddRequest request) {
         if (!permissionHelper.isAllowedForComment(request.getUserId(), productId))
             throw new CommentNotAllowedException();
-       return toUserCommentResponse(commentService.createComment(productId, request));
+        return toUserCommentResponse(commentService.createComment(productId, request));
     }
 
-    public UserCommentResponse toUserCommentResponse(Comment comment){
-        UserCommentResponse toRet = new UserCommentResponse();
-        toRet.id = comment.getId();
-        toRet.userId = comment.getUserId();
-        toRet.text = comment.getText();
-        toRet.createDate = comment.getCreateDate();
-        return toRet;
+    public UserCommentResponse toUserCommentResponse(Comment comment) {
+        return new UserCommentResponse(comment.getId(), comment.getText(), comment.getUserId(), comment.getCreateDate());
     }
 
 
