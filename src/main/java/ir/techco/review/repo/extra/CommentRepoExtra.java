@@ -1,10 +1,12 @@
 package ir.techco.review.repo.extra;
 
 import ir.techco.review.repo.document.Comment;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 public interface CommentRepoExtra {
-    List<Comment> getCommentsByProductId(String productId, Pageable pageable);
+    Page<Comment> getComments(Criteria criteria, Pageable pageable);
+
+    void validateComment(String commentId, boolean isValid, String invalidReason);
 }

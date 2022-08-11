@@ -8,14 +8,18 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.Date;
 import java.util.Objects;
 
-@Document
+@Document(collection = Comment.Name)
 public class Comment {
+    public static final String Name = "Comment";
     public static final String ID = "_id";
     public static final String TextCol = "text";
     public static final String UserIdCol = "userId";
     public static final String ProductIdCol = "productId";
     public static final String ValidCol = "valid";
+    public static final String ValidationNeededCol = "validationNeeded";
+    public static final String InvalidReasonCol = "invalidReason";
     public static final String CreateDateCol = "createDate";
+    public static final String LastUpdateCol = "lastUpdate";
 
     @Id
     private String id;
@@ -27,9 +31,15 @@ public class Comment {
     @Indexed
     private String productId;
     @Field(ValidCol)
-    private boolean valid = false;
+    private boolean valid;
+    @Field(InvalidReasonCol)
+    private String invalidReason;
+    @Field(ValidationNeededCol)
+    private boolean validationNeeded = true;
     @Field(CreateDateCol)
-    private Date createDate;
+    private Date createDate = new Date();
+    @Field(LastUpdateCol)
+    private Date lastUpdate;
 
     public String getId() {
         return id;
@@ -67,6 +77,10 @@ public class Comment {
         return createDate;
     }
 
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     public boolean isValid() {
         return valid;
     }
@@ -75,8 +89,28 @@ public class Comment {
         this.valid = valid;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public String getInvalidReason() {
+        return invalidReason;
+    }
+
+    public void setInvalidReason(String invalidReason) {
+        this.invalidReason = invalidReason;
+    }
+
+    public boolean isValidationNeeded() {
+        return validationNeeded;
+    }
+
+    public void setValidationNeeded(boolean validationNeeded) {
+        this.validationNeeded = validationNeeded;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     @Override
