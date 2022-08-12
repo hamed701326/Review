@@ -1,7 +1,7 @@
 package ir.techco.review.exception;
 
 public class CommentNotAllowedException extends RuntimeException {
-    public static final String DefaultMessage = "CommentNotAllowedException";
+    public static final String DefaultMessage = "CommentNotAllowed";
 
     public CommentNotAllowedException() {
         super(DefaultMessage);

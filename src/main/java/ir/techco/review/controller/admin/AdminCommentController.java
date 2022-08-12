@@ -56,6 +56,7 @@ public class AdminCommentController {
         return new AdminCommentResponse(
                 comment.getId(),
                 comment.getText(),
+                comment.getPoint(),
                 comment.getProductId(),
                 comment.getUserId(),
                 comment.isValid(),
