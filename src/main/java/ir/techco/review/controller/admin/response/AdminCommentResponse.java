@@ -5,23 +5,25 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class AdminCommentResponse {
-    private final String id;
-    private final String text;
-    private final String productId;
-    private final String userId;
-    private final boolean valid;
-    private final boolean needValidation;
-    private final String invalidReason;
+    private String id;
+    private String text;
+    private Integer point;
+    private String productId;
+    private String userId;
+    private boolean valid;
+    private boolean needValidation;
+    private String invalidReason;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private final Date createDate;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private final Date lastUpdate;
 
-    public AdminCommentResponse(String id, String text, String productId,
+    public AdminCommentResponse(String id, String text,Integer point, String productId,
                                 String userId, boolean valid, boolean needValidation,
                                 String invalidReason, Date createDate, Date lastUpdate) {
         this.id = id;
         this.text = text;
+        this.point = point;
         this.productId = productId;
         this.userId = userId;
         this.valid = valid;
@@ -46,6 +48,7 @@ public class AdminCommentResponse {
     public String getUserId() {
         return userId;
     }
+
     public boolean isValid() {
         return valid;
     }

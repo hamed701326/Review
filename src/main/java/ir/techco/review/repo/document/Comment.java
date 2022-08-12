@@ -13,6 +13,7 @@ public class Comment {
     public static final String Name = "Comment";
     public static final String ID = "_id";
     public static final String TextCol = "text";
+    public static final String PointCol = "point";
     public static final String UserIdCol = "userId";
     public static final String ProductIdCol = "productId";
     public static final String ValidCol = "valid";
@@ -25,6 +26,8 @@ public class Comment {
     private String id;
     @Field(TextCol)
     private String text;
+    @Field(PointCol)
+    private Integer point;
     @Field(UserIdCol)
     private String userId;
     @Field(ProductIdCol)
@@ -55,6 +58,14 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
     }
 
     public String getUserId() {
