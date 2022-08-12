@@ -4,12 +4,15 @@ import ir.techco.review.controller.admin.request.CommentValidateRequest;
 import ir.techco.review.controller.user.request.CommentAddRequest;
 import ir.techco.review.repo.CommentRepo;
 import ir.techco.review.repo.document.Comment;
+import ir.techco.review.repo.impl.CommentRepoImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -46,10 +49,18 @@ public class CommentService {
         comment.setProductId(productId);
         comment.setText(request.getText());
         comment.setUserId(request.getUserId());
+        comment.setPoint(request.getPoint());
          return commentRepo.save(comment);
     }
 
+    public CommentRepoImpl.ProductPoint getPointByProduct(String productId){
+        List<CommentRepoImpl.ProductPoint> rates = commentRepo.aggregateOnRate(List.of(productId));
+        if(rates.isEmpty())
+            return CommentRepoImpl.ProductPoint.emptyProductPoint();
+        return rates.get(0);
+    }
+
     public void validateComment(String commentId, CommentValidateRequest request) {
-        commentRepo.validateComment(commentId, request.isValid(), request.getReason());
+        commentRepo.validateComment(commentId, request.isValid(), request.getInvalidReason());
     }
 }

@@ -2,7 +2,7 @@ package ir.techco.review.controller.admin.request;
 
 public class CommentValidateRequest {
     private boolean valid;
-    private String reason;
+    private String invalidReason;
 
     public boolean isValid() {
         return valid;
@@ -12,11 +12,11 @@ public class CommentValidateRequest {
         this.valid = valid;
     }
 
-    public String getReason() {
-        return reason;
+    public String getInvalidReason() {
+        return invalidReason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setInvalidReason(String invalidReason) {
+        this.invalidReason = invalidReason;
     }
 }
