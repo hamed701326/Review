@@ -4,9 +4,11 @@ import ir.techco.review.controller.api.request.ProductVisibilityCheckRequest;
 import ir.techco.review.controller.api.response.VisibleProductResponse;
 import ir.techco.review.service.ProductAccessService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 @RestController
@@ -19,7 +21,7 @@ public class ApiAccessController {
     }
 
     @GetMapping("/visible")
-    public VisibleProductResponse getVisibleProduct(ProductVisibilityCheckRequest request){
+    public VisibleProductResponse getVisibleProduct(@RequestBody @Valid ProductVisibilityCheckRequest request){
         Set<String> visibleProductIds = productAccessService.getVisibleProductIds(request);
         return new VisibleProductResponse(visibleProductIds);
     }

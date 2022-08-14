@@ -2,8 +2,10 @@ package ir.techco.review.controller.user.request;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class CommentAddRequest {
+    @NotNull
     private String userId;
     private String text;
     @Min(value = 0, message = "Point should not be less than 0")

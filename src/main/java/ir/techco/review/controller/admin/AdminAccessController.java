@@ -13,6 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/admin/access")
 public class AdminAccessController {
@@ -27,7 +29,7 @@ public class AdminAccessController {
     }
 
     @PostMapping("/limit")
-    public void limitProductAccess(LimitAccessRequest request){
+    public void limitProductAccess(@RequestBody @Valid LimitAccessRequest request){
        productAccessService.limitProduct(request);
     }
 
@@ -40,8 +42,8 @@ public class AdminAccessController {
     @GetMapping("/all/{providerId}")
     public PageResponse<AdminAccessResponse> getAllAccessByProviderId(@PathVariable String providerId,
                                                                       @RequestParam int skip,
-                                                                      @RequestParam int size){
-        Page<ProductAccess> page = productAccessService.getAllByProviderId(providerId,skip,size);
+                                                                      @RequestParam int limit){
+        Page<ProductAccess> page = productAccessService.getAllByProviderId(providerId,skip,limit);
         Page<AdminAccessResponse> result = page.map(productAccess -> modelMapper.map(productAccess, AdminAccessResponse.class));
         return new PageResponse<>(result);
     }
@@ -60,7 +62,7 @@ public class AdminAccessController {
         return new AdminAccessChangeResponse(modifiedCount);
     }
 
-    @PutMapping("/general/comment")
+    @PutMapping("/all/comment")
     public void changeAccess(@RequestParam AccessLevel accessLevel) {
         permissionHelper.setCommentAccessLevel(accessLevel);
     }

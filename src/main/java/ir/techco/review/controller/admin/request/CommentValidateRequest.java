@@ -1,6 +1,9 @@
 package ir.techco.review.controller.admin.request;
 
+import javax.validation.constraints.NotNull;
+
 public class CommentValidateRequest {
+    @NotNull
     private boolean valid;
     private String invalidReason;
 
