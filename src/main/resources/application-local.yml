@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost/review
+
+access:
+  comment:
+    level: ALL
