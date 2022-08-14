@@ -13,5 +13,5 @@ public interface CommentRepoExtra {
 
     void validateComment(String commentId, boolean isValid, String invalidReason);
 
-    List<CommentRepoImpl.ProductPoint> aggregateOnRate(List<String> productIds);
+    List<CommentRepoImpl.ProductPoint> aggregateOnPoint(String productId);
 }

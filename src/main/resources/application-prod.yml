@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb.tech:27017
+
+access:
+  comment:
+    level: ALL

@@ -5,7 +5,4 @@ feign:
   circuitbreaker:
     enabled: true
 
-access:
-  comment:
-    level: ALL
 

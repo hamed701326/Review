@@ -76,4 +76,12 @@ public class AdminCommentResponse {
     public void setInvalidReason(String invalidReason) {
         this.invalidReason = invalidReason;
     }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 }

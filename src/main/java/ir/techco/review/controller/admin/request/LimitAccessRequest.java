@@ -1,7 +1,12 @@
 package ir.techco.review.controller.admin.request;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class LimitAccessRequest {
+    @NotNull @NotEmpty
     private String providerId;
+    @NotNull @NotEmpty
     private String productId;
     private Boolean visible;
     private Boolean commentable;

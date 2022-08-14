@@ -45,13 +45,13 @@ public class CommentRepoImpl implements CommentRepoExtra {
     }
 
     @Override
-    public List<ProductPoint> aggregateOnRate(List<String> productIds) {
-        var criteria = Criteria.where(Comment.ProductIdCol).is(productIds)
+    public List<ProductPoint> aggregateOnPoint(String productId) {
+        var criteria = Criteria.where(Comment.ProductIdCol).is(productId)
                 .and(Comment.ValidCol).is(true);
         var matchOperation = Aggregation.match(criteria);
-        var countOperation = Aggregation.count().as(TotalVote);
-        var groupOperation = Aggregation.group(Comment.ProductIdCol).avg(Comment.PointCol).as(AVG_POINT);
-        var aggregation = Aggregation.newAggregation(matchOperation,countOperation,groupOperation);
+        var groupOperation = Aggregation.group(Comment.ProductIdCol).count().as(TotalVote)
+                .avg(Comment.PointCol).as(AVG_POINT);
+        var aggregation = Aggregation.newAggregation(matchOperation,groupOperation);
         AggregationResults<ProductPoint> results = mongoOperations.aggregate(aggregation, Comment.Name, ProductPoint.class);
         return results.getMappedResults();
     }
@@ -60,7 +60,7 @@ public class CommentRepoImpl implements CommentRepoExtra {
     public static class ProductPoint {
         @Id
         private String productId;
-        private Integer avgPoint;
+        private float avgPoint;
         private Long totalVote;
 
         public String getProductId() {
@@ -71,11 +71,11 @@ public class CommentRepoImpl implements CommentRepoExtra {
             this.productId = productId;
         }
 
-        public Integer getAvgPoint() {
+        public float getAvgPoint() {
             return avgPoint;
         }
 
-        public void setAvgPoint(Integer avgPoint) {
+        public void setAvgPoint(float avgPoint) {
             this.avgPoint = avgPoint;
         }
 

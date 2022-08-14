@@ -32,7 +32,7 @@ public class ProductAccess {
     @Field(CommentableCol)
     private Boolean commentable;
     @Field(CreateDateCol)
-    private Date createDate;
+    private Date createDate = new Date();
     @Field(LastUpdateCol)
     private Date lastUpdate;
 

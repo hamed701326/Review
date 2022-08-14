@@ -2,20 +2,15 @@ package ir.techco.review.controller.user.response;
 
 public class UserPointResponse {
     private String productId;
-    private Integer point;
+    private Float point;
     private Long totalRate;
     private boolean hasVote;
 
-    public UserPointResponse(String productId, Integer point, Long totalRate, boolean hasVote) {
+    public UserPointResponse(String productId, Float point, Long totalRate, boolean hasVote) {
         this.productId = productId;
         this.point = point;
         this.totalRate = totalRate;
         this.hasVote = hasVote;
-    }
-
-    public static UserPointResponse emptyResponse(String productId) {
-
-        return new UserPointResponse(productId, null, null, false);
     }
 
     public String getProductId() {
@@ -26,11 +21,11 @@ public class UserPointResponse {
         this.productId = productId;
     }
 
-    public Integer getPoint() {
+    public Float getPoint() {
         return point;
     }
 
-    public void setPoint(Integer point) {
+    public void setPoint(Float point) {
         this.point = point;
     }
 

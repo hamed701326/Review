@@ -29,8 +29,8 @@ public class CommentService {
     }
 
     public Page<Comment> getComments(String productId, int skip, int limit) {
-        Criteria criteria = Criteria.where(Comment.ProductIdCol).is(productId)
-                .and(Comment.ValidCol).is(true);
+        if(productId== null) return getComments(skip,limit);
+        Criteria criteria = Criteria.where(Comment.ProductIdCol).is(productId);
         Sort sort = Sort.by(Comment.CreateDateCol).descending();
         Pageable pageable = PageRequest.of(skip, limit, sort);
         return commentRepo.getComments(criteria, pageable);
@@ -38,7 +38,7 @@ public class CommentService {
 
     public Page<Comment> getCommentsNeedValidation(String productId, int skip, int limit) {
         Criteria criteria = Criteria.where(Comment.ValidationNeededCol).is(true);
-        if(productId!=null) criteria.and(Comment.ProductIdCol).in(productId);
+        if(productId!=null) criteria.and(Comment.ProductIdCol).is(productId);
         Sort sort = Sort.by(Comment.CreateDateCol).descending();
         Pageable pageable = PageRequest.of(skip, limit, sort);
         return commentRepo.getComments(criteria, pageable);
@@ -54,7 +54,7 @@ public class CommentService {
     }
 
     public CommentRepoImpl.ProductPoint getPointByProduct(String productId){
-        List<CommentRepoImpl.ProductPoint> rates = commentRepo.aggregateOnRate(List.of(productId));
+        List<CommentRepoImpl.ProductPoint> rates = commentRepo.aggregateOnPoint(productId);
         if(rates.isEmpty())
             return CommentRepoImpl.ProductPoint.emptyProductPoint();
         return rates.get(0);

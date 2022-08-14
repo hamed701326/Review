@@ -3,6 +3,7 @@ package ir.techco.review.service;
 import ir.techco.review.controller.admin.request.AccessChangeRequest;
 import ir.techco.review.controller.admin.request.LimitAccessRequest;
 import ir.techco.review.controller.api.request.ProductVisibilityCheckRequest;
+import ir.techco.review.exception.NotFoundException;
 import ir.techco.review.repo.ProductAccessRepo;
 import ir.techco.review.repo.document.ProductAccess;
 import org.springframework.data.domain.Page;
@@ -42,14 +43,13 @@ public class ProductAccessService {
     }
 
     public ProductAccess getProductAccess(String productId) {
-        return productAccessRepo.findProductAccessByProductId(productId).orElseThrow(
-
-        );
+        return productAccessRepo.findProductAccessByProductId(productId)
+                .orElseThrow(()->new NotFoundException("ProductAccessNotFound"));
     }
 
-    public Page<ProductAccess> getAllByProviderId(String providerId, int skip, int size) {
+    public Page<ProductAccess> getAllByProviderId(String providerId, int skip, int limit) {
         Sort sort = Sort.by(ProductAccess.CreateDateCol).descending();
-        Pageable pageable = PageRequest.of(skip,size,sort);
+        Pageable pageable = PageRequest.of(skip,limit,sort);
         Criteria criteria = Criteria.where(ProductAccess.ProviderIdCol).is(providerId);
         return productAccessRepo.getProductAccesses(criteria,pageable);
     }
