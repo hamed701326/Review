@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/comment")
-public class CommentController {
+public class UserCommentController {
     private final CommentService commentService;
     private final PermissionHelper permissionHelper;
 
-    public CommentController(CommentService commentService, PermissionHelper permissionHelper) {
+    public UserCommentController(CommentService commentService, PermissionHelper permissionHelper) {
         this.commentService = commentService;
         this.permissionHelper = permissionHelper;
     }

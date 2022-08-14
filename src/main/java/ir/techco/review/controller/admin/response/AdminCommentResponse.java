@@ -11,27 +11,11 @@ public class AdminCommentResponse {
     private String productId;
     private String userId;
     private boolean valid;
-    private boolean needValidation;
     private String invalidReason;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private final Date createDate;
+    private Date createDate;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
-    private final Date lastUpdate;
-
-    public AdminCommentResponse(String id, String text,Integer point, String productId,
-                                String userId, boolean valid, boolean needValidation,
-                                String invalidReason, Date createDate, Date lastUpdate) {
-        this.id = id;
-        this.text = text;
-        this.point = point;
-        this.productId = productId;
-        this.userId = userId;
-        this.valid = valid;
-        this.needValidation = needValidation;
-        this.invalidReason = invalidReason;
-        this.createDate = createDate;
-        this.lastUpdate = lastUpdate;
-    }
+    private Date lastUpdate;
 
     public String getId() {
         return id;
@@ -53,10 +37,6 @@ public class AdminCommentResponse {
         return valid;
     }
 
-    public boolean isNeedValidation() {
-        return needValidation;
-    }
-
     public String getInvalidReason() {
         return invalidReason;
     }
@@ -69,4 +49,31 @@ public class AdminCommentResponse {
         return lastUpdate;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    public void setInvalidReason(String invalidReason) {
+        this.invalidReason = invalidReason;
+    }
 }

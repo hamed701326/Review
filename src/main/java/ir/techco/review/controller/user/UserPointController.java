@@ -10,18 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user/point")
-public class PointController {
+public class UserPointController {
     private final CommentService commentService;
 
-    public PointController(CommentService commentService) {
+    public UserPointController(CommentService commentService) {
         this.commentService = commentService;
     }
 
     @GetMapping("/{productId}")
     public UserPointResponse getPointByProduct(@PathVariable String productId) {
         CommentRepoImpl.ProductPoint rateByProduct = commentService.getPointByProduct(productId);
-        return rateByProduct.getTotalVote().equals(0L)? UserPointResponse.emptyResponse(productId):
-                new UserPointResponse(productId,rateByProduct.getAvgPoint(), rateByProduct.getTotalVote(), true);
+        if (rateByProduct != null)
+            return new UserPointResponse(productId,rateByProduct.getAvgPoint(), rateByProduct.getTotalVote(), true);
+        return new UserPointResponse(productId,null,null,false);
+
     }
 
 }

@@ -1,1 +1,11 @@
+spring:
+  application:
+    name: review
+feign:
+  circuitbreaker:
+    enabled: true
+
+access:
+  comment:
+    level: ALL
 
