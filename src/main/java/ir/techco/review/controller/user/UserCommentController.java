@@ -1,6 +1,7 @@
 package ir.techco.review.controller.user;
 
 import ir.techco.review.controller.user.request.CommentAddRequest;
+import ir.techco.review.controller.user.response.UserCommentAccessResponse;
 import ir.techco.review.controller.user.response.UserCommentResponse;
 import ir.techco.review.exception.NotAllowedException;
 import ir.techco.review.helper.PermissionHelper;
@@ -25,7 +26,10 @@ public class UserCommentController {
         this.permissionHelper = permissionHelper;
         this.modelMapper = modelMapper;
     }
-
+    @GetMapping("/hasAccess/{productId}/{userId}")
+    public UserCommentAccessResponse hasAccess(@PathVariable String productId, @PathVariable String userId) {
+        return new UserCommentAccessResponse(permissionHelper.isAllowedForComment(userId,productId));
+    }
     @PostMapping("/add/{productId}")
     public UserCommentResponse addComment(@PathVariable String productId,
                                           @RequestBody @Valid CommentAddRequest request) {
