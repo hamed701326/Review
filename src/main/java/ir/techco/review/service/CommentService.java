@@ -54,7 +54,7 @@ public class CommentService {
     }
 
     public CommentRepoImpl.ProductPoint getPointByProduct(String productId){
-        List<CommentRepoImpl.ProductPoint> rates = commentRepo.aggregateOnRate(List.of(productId));
+        List<CommentRepoImpl.ProductPoint> rates = commentRepo.aggregateOnPoint(productId);
         if(rates.isEmpty())
             return CommentRepoImpl.ProductPoint.emptyProductPoint();
         return rates.get(0);
