@@ -3,13 +3,13 @@ package ir.techco.review.controller.user.response;
 public class UserPointResponse {
     private String productId;
     private Float point;
-    private Long totalRate;
+    private Long totalVote;
     private boolean hasVote;
 
-    public UserPointResponse(String productId, Float point, Long totalRate, boolean hasVote) {
+    public UserPointResponse(String productId, Float point, Long totalVote, boolean hasVote) {
         this.productId = productId;
         this.point = point;
-        this.totalRate = totalRate;
+        this.totalVote = totalVote;
         this.hasVote = hasVote;
     }
 
@@ -29,12 +29,12 @@ public class UserPointResponse {
         this.point = point;
     }
 
-    public Long getTotalRate() {
-        return totalRate;
+    public Long getTotalVote() {
+        return totalVote;
     }
 
-    public void setTotalRate(Long totalRate) {
-        this.totalRate = totalRate;
+    public void setTotalVote(Long totalVote) {
+        this.totalVote = totalVote;
     }
 
     public boolean isHasVote() {

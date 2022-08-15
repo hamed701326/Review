@@ -26,7 +26,7 @@ public class AdminCommentController {
     @GetMapping("/validation-needed")
     public PageResponse<AdminCommentResponse> getValidationNeededComments(@RequestParam(required = false) String productId,
                                                                           @RequestParam(defaultValue = "0") int skip,
-                                                                          @RequestParam(defaultValue = "0") int limit) {
+                                                                          @RequestParam(defaultValue = "10") int limit) {
         Page<AdminCommentResponse> result = commentService.getCommentsNeedValidation(productId, skip, limit)
                 .map(this::toAdminCommentResponse);
         return new PageResponse<>(result);
